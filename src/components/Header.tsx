@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -25,6 +26,7 @@ import { CartDrawer } from './CartDrawer';
 import { AuthDialog } from './AuthDialog';
 
 export const Header = () => {
+  const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
   const { getTotalItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -106,7 +108,7 @@ export const Header = () => {
                     <User className="h-4 w-4 mr-2" />
                     Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate('/orders')}>
                     <ShoppingCart className="h-4 w-4 mr-2" />
                     My Orders
                   </DropdownMenuItem>

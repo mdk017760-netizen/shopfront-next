@@ -7,9 +7,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag, Shield } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -17,6 +18,7 @@ interface CartDrawerProps {
 }
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const { 
     cartItems, 
     loading, 
@@ -144,7 +146,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 <Button 
                   className="w-full bg-gradient-primary hover:opacity-90 shadow-button" 
                   size="lg"
+                  onClick={() => navigate('/checkout')}
                 >
+                  <Shield className="h-4 w-4 mr-2" />
                   Proceed to Checkout
                 </Button>
                 <Button 

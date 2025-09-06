@@ -118,7 +118,8 @@ export class ApiService {
       method: 'GET',
       headers: this.getHeaders(),
     });
-    return response.json();
+    const data = await response.json();
+    return data.product || data;
   }
 
   // Cart
@@ -165,6 +166,51 @@ export class ApiService {
     });
     const data = await response.json();
     return data.orders || [];
+  }
+
+  async getOrder(id: string): Promise<Order> {
+    const response = await fetch(`${BASE_URL}/api/v1/order/${id}`, {
+      method: 'GET',
+      headers: this.getHeaders(),
+    });
+    const data = await response.json();
+    return data.order || data;
+  }
+
+  async updateOrderStatus(id: string, statusData: { status: string }) {
+    const response = await fetch(`${BASE_URL}/api/v1/order/${id}`, {
+      method: 'PUT',
+      headers: this.getHeaders(),
+      body: JSON.stringify(statusData),
+    });
+    return response.json();
+  }
+
+  // Product Management (Admin)
+  async addProduct(productData: any) {
+    const response = await fetch(`${BASE_URL}/api/v1/product/add`, {
+      method: 'POST',
+      headers: this.getHeaders(),
+      body: JSON.stringify(productData),
+    });
+    return response.json();
+  }
+
+  async updateProduct(id: string, productData: any) {
+    const response = await fetch(`${BASE_URL}/api/v1/product/${id}`, {
+      method: 'PUT',
+      headers: this.getHeaders(),
+      body: JSON.stringify(productData),
+    });
+    return response.json();
+  }
+
+  async deleteProduct(id: string) {
+    const response = await fetch(`${BASE_URL}/api/v1/product/${id}`, {
+      method: 'DELETE',
+      headers: this.getHeaders(),
+    });
+    return response.json();
   }
 
   // Payment

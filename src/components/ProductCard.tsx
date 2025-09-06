@@ -36,16 +36,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails
           <Button size="sm" variant="secondary" className="h-8 w-8 p-0">
             <Heart className="h-4 w-4" />
           </Button>
-          {onViewDetails && (
-            <Button 
-              size="sm" 
-              variant="secondary" 
-              className="h-8 w-8 p-0"
-              onClick={() => onViewDetails(product)}
-            >
-              <Eye className="h-4 w-4" />
-            </Button>
-          )}
+            {onViewDetails && (
+              <Button 
+                size="sm" 
+                variant="secondary" 
+                className="h-8 w-8 p-0"
+                onClick={() => onViewDetails(product)}
+              >
+                <Eye className="h-4 w-4" />
+              </Button>
+            )}
         </div>
 
         {/* Stock badge */}
@@ -84,21 +84,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails
               </Badge>
             </div>
 
-            <Button 
-              size="sm" 
-              onClick={handleAddToCart}
-              disabled={product.stock === 0 || isLoading}
-              className="bg-gradient-primary hover:opacity-90 shadow-button"
-            >
-              {isLoading ? (
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-              ) : (
-                <>
-                  <ShoppingCart className="h-4 w-4 mr-1" />
-                  Add
-                </>
-              )}
-            </Button>
+                  <Button 
+                    size="sm" 
+                    onClick={handleAddToCart}
+                    disabled={product.stock === 0 || isLoading}
+                    className="bg-gradient-primary hover:opacity-90 shadow-button"
+                  >
+                    {isLoading ? (
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                    ) : (
+                      <>
+                        <ShoppingCart className="h-4 w-4 mr-1" />
+                        Add
+                      </>
+                    )}
+                  </Button>
           </div>
         </div>
       </CardContent>

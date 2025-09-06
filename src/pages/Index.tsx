@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { ProductCard } from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
@@ -26,6 +27,7 @@ import { Product, apiService } from '@/lib/api';
 import heroImage from '@/assets/hero-shopping.jpg';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -113,10 +115,10 @@ const Index = () => {
               Shop from thousands of products with fast delivery and great prices
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-              <Button size="lg" variant="secondary" className="shadow-button">
-                Shop Now
-                <ChevronRight className="ml-2 h-4 w-4" />
-              </Button>
+            <Button size="lg" variant="secondary" className="shadow-button" onClick={() => navigate('/checkout')}>
+              Shop Now
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
                 Learn More
               </Button>
@@ -282,7 +284,11 @@ const Index = () => {
                     : 'grid-cols-1'
                 }`}>
                   {filteredProducts.map(product => (
-                    <ProductCard key={product._id} product={product} />
+                    <ProductCard 
+                      key={product._id} 
+                      product={product} 
+                      onViewDetails={(product) => navigate(`/product/${product._id}`)}
+                    />
                   ))}
                 </div>
               )}
